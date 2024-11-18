@@ -1,0 +1,1 @@
+custom-json-diff -i $1 $2 -o $3 preset-diff --type bom
