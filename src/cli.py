@@ -1,5 +1,6 @@
 from subprocess import run
 import os
+import json
 import sqlite3
 from argparse import ArgumentParser
 
@@ -104,7 +105,7 @@ docker cp "$CONTAINER_NAME":/home/cyclonedx/bom.json results/
 os.system(bash_starter)
 
 # Connect to the database (or create it if it doesn't exist)
-conn = sqlite3.connect('results/cdxgen_results.db')
+conn = sqlite3.connect('cdxgen_results.db')
 cursor = conn.cursor()
 
 # Create a table to store the results (using JSON for the bom data)
