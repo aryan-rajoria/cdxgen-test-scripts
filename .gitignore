@@ -1,4 +1,4 @@
 ./trials
-./results
+results/*
 cdxgen_results.db
 temp.sh
