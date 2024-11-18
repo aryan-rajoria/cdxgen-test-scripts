@@ -10,3 +10,6 @@ Todo:
 4) quickly compare the results using (custom-bom-diff)
 
 
+```bash
+python ./src/cli.py -g https://github.com/signalapp/Signal-Android.git -e "sdk install java 17.0.13-tem" -a "-t java --deep" -r "./gradlew compilePlayStagingInstrumentationAndroidTestJavaWithJavac"
+```
