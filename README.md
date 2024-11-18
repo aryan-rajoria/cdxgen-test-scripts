@@ -13,3 +13,10 @@ Todo:
 ```bash
 python ./src/cli.py -g https://github.com/signalapp/Signal-Android.git -e "sdk install java 17.0.13-tem" -a "-t java --deep" -r "./gradlew compilePlayStagingInstrumentationAndroidTestJavaWithJavac"
 ```
+
+```
+# oh-my-zsh extension for git has useful aliases:
+gl = "git pull"
+gp = "git push"
+gcsm = "git commit --signoff --message"
+```
