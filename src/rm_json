@@ -1,0 +1,72 @@
+import json
+from argparse import ArgumentParser
+
+parser = ArgumentParser(
+    prog="rm-json",
+    description="filter elements from json lists",
+)
+parser.add_argument(
+    "-f", "--file-name",
+    dest="f", 
+    default="bom.json", 
+    help="where is the json file"
+)
+parser.add_argument(
+    "-l",
+    "--find-list",
+    dest="l",
+    default="components",
+    help="where is the list located",
+)
+parser.add_argument(
+    "-n",
+    "--field-name",
+    dest="n",
+    default="purl",
+    help="Field name to check (default: purl)",
+)
+parser.add_argument(
+    "-r",
+    "--remove",
+    dest="r",
+    default="androidx",
+    help="Value to filter out (default: androidx)",
+)
+parser.add_argument(
+    "-o", 
+    dest="o", 
+    default="bom2.json", 
+    help="where to dump new json"
+)
+
+args = parser.parse_args()
+args = vars(args)
+
+def remove_components(json_data, args):
+    if "components" in json_data:
+        json_data[args["l"]] = [
+            component
+            for component in json_data[args["l"]]
+            if args["n"] not in component or args["r"] not in component[args["n"]]
+        ]
+
+
+def main():
+    try:
+        with open(args["f"], "r") as f:
+            json_data = json.load(f)
+
+        remove_components(json_data, args)
+
+        # print(json.dumps(json_data, indent=2))
+        with open(args["o"], "w") as f2:
+            json.dump(json_data, f2, indent=2)
+
+    except FileNotFoundError:
+        print("Error: input.json not found.")
+    except json.JSONDecodeError:
+        print("Error: Invalid JSON format in input.json.")
+
+
+if __name__ == "__main__":
+    main()
